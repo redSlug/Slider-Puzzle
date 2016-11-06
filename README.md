@@ -14,7 +14,7 @@ pip install -r requirements.txt
 python server.py
 ```
 
-And visit <http://localhost:3000/>. Try opening multiple tabs!
+And visit <http://localhost:3000/>.
 
 ## Changing the port
 
