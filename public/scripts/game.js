@@ -212,18 +212,33 @@ const Game = React.createClass({
         return false;
     },
     /**
+     * Checks that the data from the server is not stale and that key is in the
+     *  data. If the data is not good, the user is notified of a server error.
+     * @param {Response} data - Data from the server.
+     * @param {String} key - Key in the data being verified.
+     * @return {boolean} Whether the data is good.
+     * */
+    serverDataIsGood: function(data, key) {
+        let tiles = this.state.tiles;
+        let tilesStr = this.getTilesString(tiles);
+        let error = !(TILES_STR in data) || data[TILES_STR] != tilesStr;
+        if (error || !(key in data)) {
+            this.notifyError();
+            return false;
+        }
+        return true;
+    },
+    /**
      * Uses data from the server to provide a hint to the user. The hint is the
      *  number on the tile needed to be clicked in order to solve the puzzle.
      * @param {Response} data - Data from the server with hint value populated.
      * */
     giveUserHint: function (data) {
+        if (!this.serverDataIsGood(data, HINT_TILE_VAL)) return;
+
         let tiles = this.state.tiles;
         let moveRequest = this.moveRequest;
         let value = data[HINT_TILE_VAL];
-        if (!(HINT_TILE_VAL in data)) {
-            this.notifyError();
-            return;
-        }
         let tileToMove = document.getElementById('tile' + value);
         let positionIndex = tiles.indexOf(value);
         moveRequest(tileToMove, positionIndex, true);
@@ -234,13 +249,7 @@ const Game = React.createClass({
      *  that if clicked will solve the puzzle.
      * */
     giveSolution: function (data) {
-        let tiles = this.state.tiles;
-        let tilesStr = this.getTilesString(tiles);
-        let error = !(TILES_STR in data) || data[TILES_STR] != tilesStr;
-        if (error || !(SOLUTION_ARR in data)) {
-            this.notifyError();
-            return;
-        }
+        if (!this.serverDataIsGood(data, SOLUTION_ARR)) return;
 
         let solutionArray = data[SOLUTION_ARR];
         if (solutionArray.length == 0) {

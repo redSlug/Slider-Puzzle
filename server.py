@@ -22,11 +22,11 @@ def request_handler():
     if request.method == 'POST':
         request_dict = request.form.to_dict()
         board = request_dict[TILES_STR]
+        response[TILES_STR] = board
         if MIN_MOVES_VAL in request_dict:
             response[MIN_MOVES_VAL] = TREE.get_min_moves(board)
         if SOLUTION_ARR in request_dict:
             response[SOLUTION_ARR] = TREE.get_all_hint_tile_values(board)
-            response[TILES_STR] = board
         elif HINT_TILE_VAL in request_dict:
             response[HINT_TILE_VAL] = TREE.get_next_hint_tile_value(board)
 
