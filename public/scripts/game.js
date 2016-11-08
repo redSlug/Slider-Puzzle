@@ -392,6 +392,16 @@ const Game = React.createClass({
         let width = this.state.width;
         let noHelp = width !== 3 || gameOver || animating;
         let helpClass = noHelp ? 'hidden' : 'button';
+
+        // This is a hacky way to reward the user for winning.
+        let showRainbow = gameOver && !animating && this.state.hintsTaken < 10;
+        if (showRainbow) {
+            document.body.classList.add('win');
+        } else {
+            document.body.classList.remove('win');
+        }
+
+
         return (
             <div>
                 <h1>Sliding Puzzle</h1>

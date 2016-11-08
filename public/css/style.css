@@ -5,6 +5,10 @@
     font-family: 'Open Sans', sans-serif;
 }
 
+.win {
+    background-image: url("http://www.clipartkid.com/images/709/rainbow-cliparts-AH5Dpb-clipart.png");
+}
+
 #game-board, #game-board * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -122,6 +126,7 @@
     padding: 4px 10px;
     margin: 5px;
     color: black;
+    background-color: white;
     border: 2px solid black;
 }
 
