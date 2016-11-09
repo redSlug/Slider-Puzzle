@@ -236,12 +236,10 @@ const Game = React.createClass({
     giveUserHint: function (data) {
         if (!this.serverDataIsGood(data, HINT_TILE_VAL)) return;
 
-        let tiles = this.state.tiles;
-        let moveRequest = this.moveRequest;
         let value = data[HINT_TILE_VAL];
         let tileToMove = document.getElementById('tile' + value);
-        let positionIndex = tiles.indexOf(value);
-        moveRequest(tileToMove, positionIndex, true);
+        let positionIndex = this.state.tiles.indexOf(value);
+        this.moveRequest(tileToMove, positionIndex, true);
     },
     /**
      * Uses data from the server to animate the solution of the puzzle.
@@ -262,6 +260,7 @@ const Game = React.createClass({
         this.setState({'animatingSolution': true});
 
         let i = 0;
+        let tiles = this.state.tiles;
 
         /**
          * Animates the switching of position of the srcElement and
