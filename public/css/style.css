@@ -22,18 +22,18 @@
 }
 
 .game-3x3 {
-    width: 304px;
-    height: 304px;
+    width: 454px;
+    height: 454px;
 }
 
 .game-4x4 {
-    width: 404px;
-    height: 404px;
+    width: 604px;
+    height: 604px;
 }
 
 .game-5x5 {
-    width: 504px;
-    height: 504px;
+    width: 754px;
+    height: 754px;
 }
 
 .hidden {
@@ -60,10 +60,10 @@
 
 .dumb-tile,
 .tile {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     float: left;
-    line-height: 100px;
+    line-height: 150px;
     font-size: 50px;
     background: #fff;
 }
